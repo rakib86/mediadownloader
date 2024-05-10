@@ -67,6 +67,15 @@ export default function Home() {
         <img src={thumbnail} alt="thumbnail" className="mt-4 rounded-lg"style={{ width: "40%", height: "auto", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }} />
         </>
       )}
+      {
+        !downloadflag && (
+          
+          <video autoPlay loop muted className="mt-4" style={{ width: "40%", height: "auto", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", borderRadius: "10px" }}>
+  <source src="https://cdn.dribbble.com/userupload/12557773/file/original-65a5b0ce8d6f5cf1c65d5749797ff875.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+        )
+      }
     </main>
   );
 }
