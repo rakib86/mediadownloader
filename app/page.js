@@ -11,7 +11,7 @@ export default function Home() {
   const [HDdownloadurl, setHDdownloadurl] = useState("");
   const [SDdownloadurl, setSDdownloadurl] = useState("");
   const [audioDownloadUrl, setAudioDownloadUrl] = useState("");
-  const [thumbnail, setThumbnail] = useState("https://assets.nflxext.com/ffe/siteui/vlv3/ff5587c5-1052-47cf-974b-a97e3b4f0656/c2e7edb5-54a9-4f1b-896c-d9edcfcc2420/BD-en-20240506-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+  const [thumbnail, setThumbnail] = useState("https://cdn.dribbble.com/userupload/5341183/file/original-274014163a821d22ec826f513fd7201b.gif");
 
   const options = {
     method: "POST",
