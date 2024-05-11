@@ -47,8 +47,8 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <h1 className="text-5xl font-bold">Free Online Video Downloader - Download Video from anywhere..</h1>
-      <p className="text-lg mt-4">Download videos from Facebook, Instagram, Twitter, and more than 80+ Platforms in High Quality Media.</p>
+      <h1 className="text-5xl text-white font-bold">Free Online Video Downloader - Download Video from anywhere..</h1>
+      <p className="text-lg text-white mt-4">Download videos from Facebook, Instagram, Twitter, and more than 80+ Platforms in High Quality Media.</p>
       <input
         type="text"
         placeholder="Search"
