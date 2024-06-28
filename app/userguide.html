@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Video Downloader</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">Online Video Downloader</h1>
+    <form id="downloadForm" class="bg-white p-6 rounded shadow-md">
+      <div class="mb-4">
+        <label for="videoUrl" class="block text-sm font-medium text-gray-700">Video URL</label>
+        <input type="text" id="videoUrl" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter video URL">
+      </div>
+      <div class="mb-4">
+        <label for="format" class="block text-sm font-medium text-gray-700">Download Format</label>
+        <select id="format" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <option value="mp4">MP4</option>
+          <option value="webm">WEBM</option>
+          <option value="mkv">MKV</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <button type="button" id="downloadButton" class="w-full py-2 px-4 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Download</button>
+      </div>
+    </form>
+    <div id="downloadLink" class="hidden mt-4 bg-green-100 p-4 rounded-md">
+      <p class="text-green-700">Your video is ready! Click the link below to download.</p>
+      <a href="#" id="downloadHref" class="text-blue-600 underline">Download Video</a>
+    </div>
+  </div>
+  <script>
+    document.getElementById('downloadButton').addEventListener('click', function() {
+      const videoUrl = document.getElementById('videoUrl').value;
+      const format = document.getElementById('format').value;
+
+      // Mock API request to process video (replace with actual API call)
+      setTimeout(() => {
+        document.getElementById('downloadLink').classList.remove('hidden');
+        document.getElementById('downloadHref').href = `#processed_video.${format}`; // Placeholder link
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
