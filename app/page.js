@@ -76,47 +76,47 @@ export default function Home() {
         <h2 className="text-2xl text-white font-bold mb-4">All resources</h2>
         <div className="grid grid-cols-4 gap-4">
           <a href="https://facebook.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/facebook-icon.png" alt="Facebook" className="w-12 h-12" />
+            <Image src="/icons8-facebook-48.png" alt="Facebook" width={48} height={48} />
             <span className="text-white mt-2">facebook.com</span>
           </a>
           <a href="https://instagram.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/instagram-icon.png" alt="Instagram" className="w-12 h-12" />
+            <Image src="/icons8-instagram-48.png" alt="Instagram" width={48} height={48} />
             <span className="text-white mt-2">instagram.com</span>
           </a>
           <a href="https://youtube.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/youtube-icon.png" alt="YouTube" className="w-12 h-12" />
+            <Image src="/icons8-youtube-48.png" alt="YouTube" width={48} height={48} />
             <span className="text-white mt-2">youtube.com</span>
           </a>
           <a href="https://twitter.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/twitter-icon.png" alt="Twitter" className="w-12 h-12" />
+            <Image src="/icons8-twitter-48.png" alt="Twitter" width={48} height={48} />
             <span className="text-white mt-2">twitter.com</span>
           </a>
           <a href="https://dailymotion.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/dailymotion-icon.png" alt="Dailymotion" className="w-12 h-12" />
+            <Image src="/icons8-dailymotion-48.png" alt="Dailymotion" width={48} height={48} />
             <span className="text-white mt-2">dailymotion.com</span>
           </a>
           <a href="https://vimeo.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/vimeo-icon.png" alt="Vimeo" className="w-12 h-12" />
+            <Image src="/icons8-vimeo-48.png" alt="Vimeo" width={48} height={48} />
             <span className="text-white mt-2">vimeo.com</span>
           </a>
           <a href="https://vk.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/vk-icon.png" alt="VK" className="w-12 h-12" />
+            <Image src="/icons8-vk-48.png" alt="VK" width={48} height={48} />
             <span className="text-white mt-2">vk.com</span>
           </a>
           <a href="https://soundcloud.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/soundcloud-icon.png" alt="SoundCloud" className="w-12 h-12" />
+            <Image src="/icons8-soundcloud-48.png" alt="SoundCloud" width={48} height={48} />
             <span className="text-white mt-2">soundcloud.com</span>
           </a>
           <a href="https://tiktok.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/tiktok-icon.png" alt="TikTok" className="w-12 h-12" />
+            <Image src="/icons8-tik-tok-48.png" alt="TikTok" width={48} height={48} />
             <span className="text-white mt-2">tiktok.com</span>
           </a>
           <a href="https://reddit.com" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/reddit-icon.png" alt="Reddit" className="w-12 h-12" />
+            <Image src="/icons8-reddit-48.png" alt="Reddit" width={48} height={48} />
             <span className="text-white mt-2">reddit.com</span>
           </a>
           <a href="https://threads.net" target="_blank" className="flex flex-col items-center">
-            <img src="/path/to/threads-icon.png" alt="Threads" className="w-12 h-12" />
+            <Image src="/icons8-threads-48.png" alt="Threads" width={48} height={48} />
             <span className="text-white mt-2">Threads</span>
           </a>
         </div>
