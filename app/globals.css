@@ -23,6 +23,17 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],
+        // You can add more custom fonts here
+      },
+    },
+  },
+  plugins: [],
+};
 @layer utilities {
   .text-balance {
     text-wrap: balance;
