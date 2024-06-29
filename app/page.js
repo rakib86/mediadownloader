@@ -89,7 +89,7 @@ export default function Home() {
 
 
     
-    else if (url.!startsWith("http")) { // Check if the input is a question
+    else if (!url.startsWith("http")) { // Check if the input is a question
       const question = url.substring(2).trim(); // Remove the "Q:" part
       try {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
@@ -136,11 +136,16 @@ export default function Home() {
       <button onClick={handleDownload} className="relative mt-10 mr-5 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-              Lets Dive ⚡
+              Download video 🙂
             </span>
           </button> 
       
-    
+      <button onClick={askqn}  className="relative mt-10 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+              Explain video ⚡
+            </span>
+          </button> 
           </div>
 
           <p className="text-lg text-white mt-4">{answer}</p>
