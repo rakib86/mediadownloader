@@ -33,21 +33,10 @@ export default function Home() {
 
 
 
-  const askqn = async () => {
 
-     if (url.startsWith("Q:")) { // Check if the input is a question
-      const question = url.substring(2).trim(); // Remove the "Q:" part
-      try {
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
-        const result = await model.generateContent(question);
-        const response = await result.response;
-        const text = await response.text();
-        console.log(text);
-        setAnswer(text); // Set the answer to state
-      } catch (error) {
-        console.error(error);
-      }
-    } else
+  const handleDownload = async () => {
+
+    
 
 
     if (url.includes("youtube.com/watch?v=")) { // Check if the URL is a YouTube link
@@ -78,17 +67,29 @@ export default function Home() {
       } catch (error) {
         console.error(error);
       }
+
+      try {
+        const response = await axios.request(options);
+        if (response) {
+          setDownloadflag(true);
+          console.log(response.data);
+          setHDdownloadurl(response.data.medias[0].url);
+          setSDdownloadurl(response.data.medias[1].url);
+          setAudioDownloadUrl(response.data.medias[2].url);
+          setThumbnail(response.data.thumbnail);
+        } else {
+          alert("Invalid URL");
+        }
+      } catch (error) {
+        console.error(error);
+      }
      
   
     }
 
+
     
-   
-
-  }
-
-  const handleDownload = async () => {
-    if (url.startsWith("Q:")) { // Check if the input is a question
+    else if (url.!startsWith("http")) { // Check if the input is a question
       const question = url.substring(2).trim(); // Remove the "Q:" part
       try {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
@@ -135,16 +136,11 @@ export default function Home() {
       <button onClick={handleDownload} className="relative mt-10 mr-5 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-              Download video 🙂
+              Lets Dive ⚡
             </span>
           </button> 
       
-      <button onClick={askqn}  className="relative mt-10 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-              Explain video ⚡
-            </span>
-          </button> 
+    
           </div>
 
           <p className="text-lg text-white mt-4">{answer}</p>
