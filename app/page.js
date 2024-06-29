@@ -1,8 +1,12 @@
-"use client";
+"use client"
 
 import axios from "axios";
 import { useState } from "react";
 import Image from "next/image";
+
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI('AIzaSyDqjTpZuQfcACEUVIrXNRlZdOBXl9k5PnI');
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -11,6 +15,7 @@ export default function Home() {
   const [SDdownloadurl, setSDdownloadurl] = useState("");
   const [audioDownloadUrl, setAudioDownloadUrl] = useState("");
   const [thumbnail, setThumbnail] = useState("https://cdn.dribbble.com/userupload/5341183/file/original-274014163a821d22ec826f513fd7201b.gif");
+  const [answer, setAnswer] = useState(""); // State to hold the answer from Gemini AI
 
   const options = {
     method: "POST",
@@ -25,22 +30,89 @@ export default function Home() {
     },
   };
 
-  const handleDownload = async () => {
-    try {
-      const response = await axios.request(options);
 
-      if (response) {
-        setDownloadflag(true);
-        console.log(response.data);
-        setHDdownloadurl(response.data.medias[0].url);
-        setSDdownloadurl(response.data.medias[1].url);
-        setAudioDownloadUrl(response.data.medias[2].url);
-        setThumbnail(response.data.thumbnail);
-      } else {
-        alert("Invalid URL");
+
+
+  const askqn = async () => {
+
+    if (url.startsWith("Q:")) { // Check if the input is a question
+      const question = url.substring(2).trim(); // Remove the "Q:" part
+      try {
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+        const result = await model.generateContent(question);
+        const response = await result.response;
+        const text = await response.text();
+        console.log(text);
+        setAnswer(text); // Set the answer to state
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
+    } else if (url.includes("youtube.com/watch?v=")) { // Check if the URL is a YouTube link
+      const videoId = url.split("v=")[1].split("&")[0]; // Extract video ID from URL
+
+      const options2 = {
+        method: 'GET',
+        url: 'https://youtube-transcriptor.p.rapidapi.com/transcript',
+        params: {
+          video_id: videoId,
+          lang: 'en'
+        },
+        headers: {
+          'x-rapidapi-key': 'efae2b562emsh44fbf23a7ef4facp1be0ecjsn5449cfe22770',
+          'x-rapidapi-host': 'youtube-transcriptor.p.rapidapi.com'
+        }
+      };
+      
+      try {
+        const response = await axios.request(options2);
+        console.log(response);
+        const caption = await response.data[0].transcriptionAsText;
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+        const result = await model.generateContent("Summarize the text and give output in 4 line with easy words: " + caption);	
+        const text = await result.response.text();
+        console.log(text);
+        setAnswer(text); // Set the answer to state
+      } catch (error) {
+        console.error(error);
+      }
+     
+  
+    }
+
+    
+   
+
+  }
+
+  const handleDownload = async () => {
+    if (url.startsWith("Q:")) { // Check if the input is a question
+      const question = url.substring(2).trim(); // Remove the "Q:" part
+      try {
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+        const result = await model.generateContent(question);
+        const response = await result.response;
+        const text = await response.text();
+        console.log(text);
+        setAnswer(text); // Set the answer to state
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        const response = await axios.request(options);
+        if (response) {
+          setDownloadflag(true);
+          console.log(response.data);
+          setHDdownloadurl(response.data.medias[0].url);
+          setSDdownloadurl(response.data.medias[1].url);
+          setAudioDownloadUrl(response.data.medias[2].url);
+          setThumbnail(response.data.thumbnail);
+        } else {
+          alert("Invalid URL");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -51,10 +123,29 @@ export default function Home() {
       <input
         type="text"
         placeholder="Search"
-        className="w-1/2 mt-5 p-2 border border-gray-300 rounded-lg text-black"
+        className="w-1/2 mt-5 p-2 border border-gray-300 rounded-full bg-black text-white"
         onChange={(e) => setUrl(e.target.value)}
       />
-      <button onClick={handleDownload} className="bg-white text-black p-2 rounded-lg mt-4">Download</button>
+
+      <div classname="flex flex-row">
+    
+      <button onClick={handleDownload} className="relative mt-10 mr-5 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+              Download video 🙂
+            </span>
+          </button> 
+      
+      <button onClick={askqn}  className="relative mt-10 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+              Explain video ⚡
+            </span>
+          </button> 
+          </div>
+
+          <p className="text-lg text-white mt-4">{answer}</p>
+      
       {downloadflag && (
         <>
           <div className="flex flex-row items-center mt-4">
