@@ -35,6 +35,19 @@ export default function Home() {
 
   const askqn = async () => {
 
+     if (url.startsWith("Q:")) { // Check if the input is a question
+      const question = url.substring(2).trim(); // Remove the "Q:" part
+      try {
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+        const result = await model.generateContent(question);
+        const response = await result.response;
+        const text = await response.text();
+        console.log(text);
+        setAnswer(text); // Set the answer to state
+      } catch (error) {
+        console.error(error);
+      }
+    } else
 
 
     if (url.includes("youtube.com/watch?v=")) { // Check if the URL is a YouTube link
