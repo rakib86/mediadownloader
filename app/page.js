@@ -36,6 +36,7 @@ export default function Home() {
   const askqn = async () => {
 
 
+
     if (url.includes("youtube.com/watch?v=")) { // Check if the URL is a YouTube link
       const videoId = url.split("v=")[1].split("&")[0]; // Extract video ID from URL
 
